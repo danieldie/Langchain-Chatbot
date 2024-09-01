@@ -15,6 +15,12 @@ export async function POST(request: Request) {
 
     console.log(res.sourceDocuments)
 
-    const links: string[] = Array.from(new Set(res.sourceDocuments.map((document: {metadata: {source: string}}) => document.metadata.source)))
+    const links: string[] = Array.from(
+        new Set(
+            res.sourceDocuments
+              .filter((document: { metadata: { source?: string } }) => document.metadata.source)
+              .map((document: { metadata: { source: string } }) => document.metadata.source)
+          )
+    )
     return NextResponse.json({role: "assistant", content: res.text, links: links})
 }

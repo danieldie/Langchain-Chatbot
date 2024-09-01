@@ -1,11 +1,32 @@
 const LoadingDots = () => {
-  let circleCommonClasses = "h-1.5 w-1.5 bg-current rounded-full";
-
   return (
-    <div className="flex text-slate-400">
-      <div className={`${circleCommonClasses} mr-1 animate-bounce`}></div>
-      <div className={`${circleCommonClasses} mr-1 animate-bounce200`}></div>
-      <div className={`${circleCommonClasses} animate-bounce400`}></div>
+    <div className="loading-dots">
+      <span className="dot"></span>
+      <span className="dot"></span>
+      <span className="dot"></span>
+      <style jsx>{`
+        .loading-dots {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+        }
+        .dot {
+          width: 8px;
+          height: 8px;
+          background-color: black;
+          border-radius: 50%;
+          animation: dot-blink 1s infinite;
+        }
+        @keyframes dot-blink {
+          0%, 20%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.3;
+          }
+        }
+      `}</style>
     </div>
   );
 };
