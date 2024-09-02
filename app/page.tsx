@@ -4,8 +4,37 @@ import { useState, useRef, useEffect } from "react";
 import { Message } from "@/types/message";
 import { Send } from "react-feather";
 import LoadingDots from "@/components/LoadingDots";
+import { useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+
+import Dropdown from "@/components/Dropdown";
 
 export default function Home() {
+
+  const router = useRouter();
+  const { data: session, status } = useSession();
+
+  if (status === "unauthenticated") {
+    router.push("/auth/signin");
+  }
+
+  const dropdownOptions = [
+    {
+      label: "Profile",
+      itemClick: ()=> {
+        router.push("/auth/profile");
+      }
+    },
+    {
+      label: "SignOut",
+      itemClick: ()=>{
+        signOut({ redirect: false }).then(() => {
+          router.push("/auth/signin");
+        });
+      }
+    }
+  ]
+
   const [message, setMessage] = useState<string>("");
   const [history, setHistory] = useState<Message[]>([
     {
@@ -56,9 +85,12 @@ export default function Home() {
   return (
     <main className="h-screen bg-white p-6 flex flex-col">
       <div className="flex flex-col gap-8 w-full items-center flex-grow max-h-full">
-        <h1 className="text-4xl text-transparent font-extralight bg-clip-text bg-gradient-to-r from-violet-800 to-fuchsia-500">
-          Bible Chat
-        </h1>
+        <div className="flex lg:w-3/4">
+          <h1 className="flex w-full justify-center text-4xl text-transparent font-extralight bg-clip-text bg-gradient-to-r from-violet-800 to-fuchsia-500">
+            Bible Chat
+          </h1>
+          <Dropdown label={session?.user?.name ?? "Not Signed"} options={dropdownOptions}/>
+        </div>
         <form
           className="rounded-2xl border-purple-700 border-opacity-5 border lg:w-3/4 flex-grow flex flex-col bg-[url('/images/bg.png')] bg-cover max-h-full overflow-clip"
           onSubmit={(e) => {
@@ -87,7 +119,7 @@ export default function Home() {
                           Bible AI
                         </p>
                         {message.content}
-                        {message.links && message.links.length > 0  && (
+                        {message.links && message.links.length > 0 && (
                           <div className="mt-4 flex flex-col gap-2">
                             <p className="text-sm font-medium text-slate-500">
                               Sources:
@@ -119,7 +151,7 @@ export default function Home() {
                       {message.content}
                     </div>
                   );
-                default:  
+                default:
                   return null;
               }
             })}
