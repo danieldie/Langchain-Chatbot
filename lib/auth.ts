@@ -2,6 +2,7 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/models/User";
 import type { NextAuthOptions } from "next-auth";
 import credentials from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 
 export const authOptions: NextAuthOptions  = {
@@ -30,6 +31,10 @@ export const authOptions: NextAuthOptions  = {
             return user;
         },
       }),
+      GoogleProvider({
+        clientId: process.env.GOOGLE_ID ?? "",
+        clientSecret: process.env.GOOGLE_SECRET ?? ""
+      })
     ],
     session: {
       strategy: "jwt",
@@ -40,6 +45,24 @@ export const authOptions: NextAuthOptions  = {
           token.name = session.name
         }
         return token
-      }
+      },
+      async signIn({ user, account, profile, email, credentials }) {
+
+        // await connectDB();
+        
+        // const existinguser = await User.findOne({
+        //   email: email,
+        // });
+        // if(!existinguser) {
+        //   const r = await register({
+        //     email: user.email,
+        //     password: "",
+        //     name: user.name
+        //   });
+        //   return true;
+        // }
+
+        return true;
+      },
     }
 };

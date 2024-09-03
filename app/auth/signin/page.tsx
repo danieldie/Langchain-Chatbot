@@ -45,6 +45,10 @@ const SignIn = () => {
               className='mt-2 '
             />
             <PrimaryButton text={"Sign In"} className='mt-4'/>
+            <div onClick={()=>signIn('google')} className="mt-4 bg-gradient-to-r from-violet-800 to-fuchsia-500 w-full rounded-xl p-2 flex justify-center items-center text-white font-bold cursor-pointer">
+              <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo" />
+              <p>&nbsp;&nbsp;Signin with Google</p>
+            </div>
           </form>
         </div>
         <div className='flex-1 hidden md:flex p-10 w-1/2 text-white leading-8  flex-col justify-center items-center bg-gradient-to-r from-violet-800 to-fuchsia-500'>
