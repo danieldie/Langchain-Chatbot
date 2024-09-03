@@ -119,22 +119,42 @@ export default function Home() {
                           Bible AI
                         </p>
                         {message.content}
-                        {message.links && message.links.length > 0 && (
-                          <div className="mt-4 flex flex-col gap-2">
-                            <p className="text-sm font-medium text-slate-500">
-                              Sources:
-                            </p>
-                            {message.links.map((link) => (
-                              <a
-                                href={link}
-                                key={link}
-                                className="block w-fit px-2 py-1 text-sm text-violet-700 bg-violet-100 rounded"
-                              >
-                                {formatPageName(link)}
-                              </a>
-                            ))}
-                          </div>
-                        )}
+                        {
+                          message.links && message.links.length > 0 && (
+                            <div className="mt-4 flex flex-col gap-2">
+                              <p className="text-sm font-medium text-slate-500">
+                                Sources:
+                              </p>
+                              {message.links.map((link) => (
+                                <a
+                                  href={link}
+                                  key={link}
+                                  className="block w-fit px-2 py-1 text-sm text-violet-700 bg-violet-100 rounded"
+                                >
+                                  {formatPageName(link)}
+                                </a>
+                              ))}
+                            </div>
+                          )
+                        }
+                        {
+                          message.verseContents && message.verseContents.length > 0 && (
+                            <div className="mt-4 flex flex-col gap-2">
+                              <p className="text-sm font-medium text-slate-500">
+                                Verse:
+                              </p>
+                                {message.verseContents.map((verseContent) =>
+                                  <p>
+                                    <div
+                                      dangerouslySetInnerHTML={{
+                                        __html: verseContent.replace(/\n/g, '<br />'),
+                                      }}
+                                    /><br/>
+                                  </p>
+                                )}
+                            </div>
+                          )
+                        }
                       </div>
                     </div>
                   );

@@ -13,8 +13,6 @@ export async function POST(request: Request) {
             chat_history: history.map(h => h.content).join("\n"),
         });
 
-    console.log(res.sourceDocuments)
-
     const links: string[] = Array.from(
         new Set(
             res.sourceDocuments
@@ -22,5 +20,8 @@ export async function POST(request: Request) {
               .map((document: { metadata: { source: string } }) => document.metadata.source)
           )
     )
-    return NextResponse.json({role: "assistant", content: res.text, links: links})
+
+    const verseContents: string[] = Array.from(new Set(res.sourceDocuments.map(( document:{ pageContent: string }) => document.pageContent )));
+
+    return NextResponse.json({role: "assistant", content: res.text, links: links, verseContents: verseContents})
 }
