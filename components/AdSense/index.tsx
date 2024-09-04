@@ -51,6 +51,8 @@ const AdSense = (props: AdsBannerProps) => {
      style={{
       display: "block",
       overflow: "hidden",
+      width: "728px",
+      height: "250px",
       border: process.env.NODE_ENV === "development" ? "1px solid red" : "none",
      }}
      data-adtest="on"
