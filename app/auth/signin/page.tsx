@@ -80,7 +80,7 @@ const SignIn = () => {
       <AdSense
         data-ad-slot={process.env.GOOGLE_ADS_SLOT ?? ""}
         data-full-width-responsive="true"
-        data-ad-format="fluid"
+        data-ad-format="auto"
       />
     </AuthLayout>
   );
