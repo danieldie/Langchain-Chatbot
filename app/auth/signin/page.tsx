@@ -5,11 +5,17 @@ import AuthLayout from "@/components/AuthLayout";
 import TextInput from "@/components/Patterns/Input";
 import PrimaryButton from "@/components/Patterns/Button/PrimaryButton";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 const SignIn = () => {
   const router = useRouter();
   const [error, setError] = useState("");
+
+  const { status } = useSession();
+
+  if (status === "authenticated") {
+    router.push("/");
+  }
 
   const handleSubmit =async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

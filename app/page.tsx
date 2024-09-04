@@ -6,8 +6,8 @@ import { Send } from "react-feather";
 import LoadingDots from "@/components/LoadingDots";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
-
 import Dropdown from "@/components/Dropdown";
+import AdSense from "@/components/AdSense";
 
 export default function Home() {
 
@@ -224,6 +224,11 @@ export default function Home() {
           </div>
         </form>
       </div>
+      <AdSense
+        data-ad-slot={process.env.GOOGLE_ADS_SLOT ?? ""}
+        data-full-width-responsive="true"
+        data-ad-format="fluid"
+      />
     </main>
   );
 }
