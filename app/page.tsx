@@ -48,7 +48,7 @@ export default function Home() {
   const handleClick = () => {
     if (message === "") return;
     const newMessage = { role: "user", content: message };
-    setHistory((oldHistory) => [...oldHistory, newMessage]);
+    setHistory((oldHistory:any) => [...oldHistory, newMessage]);
     setMessage("");
     setLoading(true);
 
