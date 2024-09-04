@@ -51,9 +51,6 @@ const AdSense = (props: AdsBannerProps) => {
      style={{
       display: "block",
       overflow: "hidden",
-      width: '100%',        // Full width of the parent container
-        height: '250px',      // Set a default height
-        minWidth: '300px',    // Ensure there's a minimum width
       border: process.env.NODE_ENV === "development" ? "1px solid red" : "none",
      }}
     //  data-adtest="on"
