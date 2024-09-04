@@ -6,7 +6,7 @@ import TextInput from "@/components/Patterns/Input";
 import PrimaryButton from "@/components/Patterns/Button/PrimaryButton";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import AdSense from "@/components/AdSense";
+import AdBanner from "@/components/AdBanner";
 
 const SignIn = () => {
   const router = useRouter();
@@ -77,10 +77,10 @@ const SignIn = () => {
         </div>
       </div>
       
-      <AdSense
-        data-ad-slot={process.env.GOOGLE_ADS_SLOT ?? ""}
-        data-full-width-responsive="true"
-        data-ad-format="auto"
+      <AdBanner
+        dataAdFormat="auto"
+        dataFullWidthResponsive={true}
+        dataAdSlot="2154746507"
       />
     </AuthLayout>
   );
