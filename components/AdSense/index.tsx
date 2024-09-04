@@ -55,7 +55,7 @@ const AdSense = (props: AdsBannerProps) => {
       height: "250px",
       border: process.env.NODE_ENV === "development" ? "1px solid red" : "none",
      }}
-     data-adtest="on"
+    //  data-adtest="on"
      data-ad-client={process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}
      {...props}
     />
